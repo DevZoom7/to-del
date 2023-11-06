@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@mixin pseudo {
+   &::before,
+   &::after {
+      @content;
+   }
+}
+
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   font: inherit;
+   @include pseudo {
+      box-sizing: border-box;
+   }
+}
+
+html {
+   color-scheme: dark;
+}
+
+body {
+   min-height: 100dvh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 1rem;
+   font-family: sans-serif;
+   background-color: rgb(15 23 42);
+}
+
+:where(img, picture, video, svg) {
+   display: block;
+   max-width: 100%;
+}
+
+a {
+   color: rgb(33, 85, 255);
+   text-decoration: none;
+   &:hover {
+      text-decoration: underline;
+   }
+   &[data-direction="forward"] {
+      &::after {
+         content: " →";
+      }
+   }
+   &[data-direction="backward"] {
+      &::before {
+         content: "← ";
+      }
+   }
+}
